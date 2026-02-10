@@ -57,8 +57,8 @@ if (!startResult.ok || !endResult.ok) {
   return errors;
 }
 
-startUtc = startResult.value;
-endUtc = endResult.value;
+startUtc = Number(startResult.value);
+endUtc = Number(endResult.value);
 
   } catch {
     errors.push("INVALID_DATE");

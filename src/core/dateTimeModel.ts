@@ -4,8 +4,10 @@ export type DateTimeDraft = {
 };
 
 export type RangeDraft = {
-  start: DateTimeDraft | null;
+  start: DateTimeDraft  | null;
   end: DateTimeDraft | null;
+  startUtc?: string;
+  endUtc?: string;
 };
 
 export type TimeValue = {

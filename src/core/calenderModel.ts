@@ -7,7 +7,7 @@ export type CalendarDay = {
 export function buildCalendarMonth(year: number, month: number) {
   const days: CalendarDay[] = [];
 
-  const firstDay = new Date(Date.UTC(year, month, 1));
+  // const firstDay = new Date(Date.UTC(year, month, 1));
   const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
 
   for (let day = 1; day <= daysInMonth; day++) {
