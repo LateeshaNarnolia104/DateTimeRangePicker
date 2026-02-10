@@ -3,7 +3,7 @@ type ConvertResult =
   | { ok: false; error: string };
 
 export function convertToUtc(
-date: string, time: string, timezone: string): ConvertResult {
+date: string, time: string, _timezone: string): ConvertResult {
   if (!date || !time) {
     return { ok: false, error: "Missing date or time" };
   }
