@@ -13,11 +13,11 @@ type Props = {
 export function TimeInput({ label, value, onChange }: Props) {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-sm text-gray-600">{label}</label>
+      <label className="text-sm text-black">{label}</label>
 
       <input
         type="time"
-        className="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+        className="border bg-black  rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
         value={
           value
             ? `${String(value.hours).padStart(2, "0")}:${String(

@@ -88,7 +88,7 @@ export function DateTimeRangePicker() {
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white rounded-3xl shadow-2xl">
       {/* HEADER */}
-      <h1 className="text-4xl font-black text-center mb-2">
+      <h1 className="text-4xl font-black text-black text-center mb-2">
         Date Time Range Picker
       </h1>
       <p className="text-center text-gray-600 mb-8">
@@ -96,7 +96,7 @@ export function DateTimeRangePicker() {
       </p>
 
       {/* TIMEZONE */}
-      <div className="flex justify-center mb-10">
+      <div className="flex justify-center text-black  mb-10">
         <select
           value={timezone}
           onChange={e => setTimezone(e.target.value)}
@@ -111,21 +111,21 @@ export function DateTimeRangePicker() {
       <div className="grid lg:grid-cols-2 gap-12">
         {/* CALENDAR */}
         <section>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center  text-black justify-between mb-4">
             <button
               onClick={prevMonth}
-              className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 font-bold"
+              className="px-4 py-2 rounded-lg text-amber-50 bg-amber-50 hover:bg-gray-200"
             >
               ←
             </button>
 
-            <h2 className="text-2xl font-extrabold">
+            <h2 className="text-2xl ">
               {MONTH_NAMES[month]} {year}
             </h2>
 
             <button
               onClick={nextMonth}
-              className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 font-bold"
+              className="px-4 py-2 rounded-lg text-amber-50 bg-gray-100 hover:bg-gray-200 font-bold"
             >
               →
             </button>
@@ -155,7 +155,7 @@ export function DateTimeRangePicker() {
 
         {/* TIME INPUTS */}
         <section className="space-y-6">
-          <h4 className="text-2xl font-bold">Time Selection</h4>
+          <h4 className="text-2xl text-black font-bold">Time Selection</h4>
 
           {!dateSelected && (
             <p className="text-sm text-gray-500">
@@ -205,7 +205,7 @@ export function DateTimeRangePicker() {
           </div>
 
           {/* UTC PREVIEW */}
-          <div className="p-4 bg-gray-50 rounded-xl border">
+          <div className="p-4 bg-gray-100 text-black rounded-xl border">
             <h4>UTC Previw</h4>
             <p><b>Start:</b> {toUTC(draft.start?.date, draft.start?.time)}</p>
             <p><b>End:</b> {toUTC(draft.end?.date, draft.end?.time)}</p>
