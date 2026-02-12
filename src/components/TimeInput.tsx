@@ -10,14 +10,15 @@ type Props = {
   disabled?: boolean; 
 };
 
-export function TimeInput({ label, value, onChange }: Props) {
+export function TimeInput({ label, value, onChange, disabled }: Props) {
   return (
-    <div className="flex flex-col gap-1">
-      <label className="text-sm text-black">{label}</label>
+    <div className="flex flex-col gap-2">
+      <label className="text-sm font-semibold text-gray-700">{label}</label>
 
       <input
         type="time"
-        className="border bg-black  rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+        disabled={disabled}
+        className="border-2 border-blue-300 bg-white text-gray-800 rounded-lg px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed"
         value={
           value
             ? `${String(value.hours).padStart(2, "0")}:${String(

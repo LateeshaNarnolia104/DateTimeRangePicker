@@ -18,10 +18,10 @@ export function DateTimeRangePicker() {
   const [errors, setErrors] = useState<string[]>([]);
   const [timezone, setTimezone] = useState("Asia/Kolkata");
 
-  /* 📅 MONTH STATE (0-based month) */
+  /* MONTH STATE (0-based month) */
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
-  const [month, setMonth] = useState(today.getMonth()); // ✅ 0-based
+  const [month, setMonth] = useState(today.getMonth()); // 0-based
 
   const timezones = [
     "Asia/Kolkata",
@@ -31,7 +31,7 @@ export function DateTimeRangePicker() {
     "Australia/Sydney",
   ];
 
-  /* ⏮️⏭️ MONTH NAV */
+  /* MONTH NAV */
   function prevMonth() {
     setDraft({ start: null, end: null });
     if (month === 0) {
@@ -52,7 +52,7 @@ export function DateTimeRangePicker() {
     }
   }
 
-  /* ⏱️ TIME HELPERS */
+  /* TIME HELPERS */
   function timeValueToString(time: TimeValue | null): string | null {
     if (!time) return null;
     return `${String(time.hours).padStart(2, "0")}:${String(time.minutes).padStart(2, "0")}`;
@@ -63,7 +63,7 @@ export function DateTimeRangePicker() {
   return { hours, minutes };
 }
 
-  /* ✅ VALIDATION */
+  /* VALIDATION */
   useEffect(() => {
     const errs = validateRange(draft, timezone, {
       minUtc: Date.now(),
@@ -73,7 +73,7 @@ export function DateTimeRangePicker() {
     setErrors(errs);
   }, [draft, timezone]);
 
-  /* 🌍 UTC PREVIEW */
+  /* UTC PREVIEW */
   function toUTC(date?: Date | null, time?: string | null) {
     if (!date || !time) return "—";
     const d = new Date(date);
@@ -86,46 +86,53 @@ export function DateTimeRangePicker() {
   const dateSelected = Boolean(draft.start?.date && draft.end?.date);
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white rounded-3xl shadow-2xl">
-      {/* HEADER */}
-      <h1 className="text-4xl font-black text-black text-center mb-2">
-        Date Time Range Picker
-      </h1>
-      <p className="text-center text-gray-600 mb-8">
-        Use ← → ↑ ↓ and Enter
-      </p>
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-100 p-8">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+        {/* HEADER */}
+        <div className="bg-linear-to-r from-blue-600 to-indigo-600 p-8 text-white">
+          <h1 className="text-4xl font-bold text-center mb-2">
+            Date & Time Range Picker
+          </h1>
+          <p className="text-center text-blue-100 text-sm">
+            Use ← → ↑ ↓ and Enter to navigate
+          </p>
+        </div>
 
-      {/* TIMEZONE */}
-      <div className="flex justify-center text-black  mb-10">
-        <select
-          value={timezone}
-          onChange={e => setTimezone(e.target.value)}
-          className="px-4 py-2 border-2 rounded-xl font-semibold"
-        >
-          {timezones.map(tz => (
-            <option key={tz}>{tz}</option>
-          ))}
-        </select>
-      </div>
+        <div className="p-8">
+          {/* TIMEZONE */}
+          <div className="flex justify-center mb-10">
+            <div className="flex items-center gap-3">
+              <label className="text-gray-700 font-semibold">Timezone:</label>
+              <select
+                value={timezone}
+                onChange={e => setTimezone(e.target.value)}
+                className="px-4 py-2 border-2 border-blue-300 rounded-lg font-semibold text-gray-700 bg-white hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              >
+                {timezones.map(tz => (
+                  <option key={tz}>{tz}</option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-      <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-12">
         {/* CALENDAR */}
         <section>
-          <div className="flex items-center  text-black justify-between mb-4">
+          <div className="flex items-center justify-between mb-6 gap-4">
             <button
               onClick={prevMonth}
-              className="px-4 py-2 rounded-lg text-amber-50 bg-amber-50 hover:bg-gray-200"
+              className="p-2 rounded-lg text-blue-600 bg-blue-50 hover:bg-blue-200 transition font-bold text-xl"
             >
               ←
             </button>
 
-            <h2 className="text-2xl ">
+            <h2 className="text-2xl font-bold text-gray-800 flex-1 text-center">
               {MONTH_NAMES[month]} {year}
             </h2>
 
             <button
               onClick={nextMonth}
-              className="px-4 py-2 rounded-lg text-amber-50 bg-gray-100 hover:bg-gray-200 font-bold"
+              className="p-2 rounded-lg text-blue-600 bg-blue-50 hover:bg-blue-200 transition font-bold text-xl"
             >
               →
             </button>
@@ -155,15 +162,19 @@ export function DateTimeRangePicker() {
 
         {/* TIME INPUTS */}
         <section className="space-y-6">
-          <h4 className="text-2xl text-black font-bold">Time Selection</h4>
+          <div className="border-l-4 border-blue-600 pl-4">
+            <h4 className="text-2xl text-gray-800 font-bold">Time Selection</h4>
+          </div>
 
           {!dateSelected && (
-            <p className="text-sm text-gray-500">
-              Select start & end date first
-            </p>
+            <div className="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-lg">
+              <p className="text-sm text-amber-800 font-medium">
+                Select start & end date first
+              </p>
+            </div>
           )}
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid text-amber-50 grid-cols-2 gap-6">
             <TimeInput
               label="Start Time"
               value={stringToTimeValue(draft.start?.time ?? null)}
@@ -205,24 +216,31 @@ export function DateTimeRangePicker() {
           </div>
 
           {/* UTC PREVIEW */}
-          <div className="p-4 bg-gray-100 text-black rounded-xl border">
-            <h4>UTC Previw</h4>
-            <p><b>Start:</b> {toUTC(draft.start?.date, draft.start?.time)}</p>
-            <p><b>End:</b> {toUTC(draft.end?.date, draft.end?.time)}</p>
+          <div className="p-6 bg-linear-to-br from-gray-50 to-gray-100 text-gray-800 rounded-lg border-2 border-gray-200">
+            <h4 className="font-bold text-lg mb-3 text-gray-900">UTC Preview</h4>
+            <div className="space-y-2 font-mono text-sm">
+              <p><span className="font-bold text-blue-600">Start:</span> <span className="text-gray-700">{toUTC(draft.start?.date, draft.start?.time)}</span></p>
+              <p><span className="font-bold text-blue-600">End:</span> <span className="text-gray-700">{toUTC(draft.end?.date, draft.end?.time)}</span></p>
+            </div>
           </div>
         </section>
       </div>
-
-      {/* ERRORS */}
-      {errors.length > 0 && (
-        <div className="mt-8 p-6 bg-red-50 rounded-xl">
-          {errors.map((e, i) => (
-            <p key={i} className="text-red-700 font-semibold">
-              ⚠ {e}
-            </p>
-          ))}
         </div>
-      )}
+
+        {/* ERRORS */}
+        {errors.length > 0 && (
+          <div className="p-6 bg-red-50 border-t-2 border-red-200">
+            <h3 className="font-bold text-red-700 mb-3 text-lg">Validation Errors</h3>
+            <div className="space-y-2">
+              {errors.map((e, i) => (
+                <p key={i} className="text-red-700 text-sm">
+                  • {e}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
