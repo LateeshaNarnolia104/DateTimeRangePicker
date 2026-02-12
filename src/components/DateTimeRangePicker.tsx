@@ -26,9 +26,6 @@ export function DateTimeRangePicker() {
   const timezones = [
     "Asia/Kolkata",
     "UTC",
-    "America/New_York",
-    "Europe/London",
-    "Australia/Sydney",
   ];
 
   /* MONTH NAV */
