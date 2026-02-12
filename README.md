@@ -31,6 +31,7 @@ The project focuses on clean logic separation, strong typing, and real-world val
 
 ---
 
-https://date-time-range-picker-ztqn.vercel.app/
-storybook: https://date-time-range-picker-lmdb.vercel.app/?path=/story/picker-datetimerangepicker--default
+WebApp: https://date-time-range-picker-ztqn.vercel.app/
+<br>
+Storybook: https://date-time-range-picker-lmdb.vercel.app/?path=/story/picker-datetimerangepicker--default
 
